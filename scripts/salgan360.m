@@ -55,8 +55,8 @@ for n=3:length(imlist)
     im_cub_sal = zeros(iml, iml, 6, 3);
     im_salgan_0 = zeros(iml,iml*2);
    
-    for v = 1:length(headmove_v)*length(headmove_h)
-        for h=1:length(headmove_v)*length(headmove_h)
+    for v = 1:length(headmove_v)
+        for h=1:length(headmove_h)
             for i=1:6
                 filename = saliencyList(i+(v-1)*54+(h-1)*6+2).name
                 cubsal = double(imread(['predictions_local_salmap\', filename]));
