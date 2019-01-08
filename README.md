@@ -1,6 +1,7 @@
 # SalGAN360: Visual Saliency Detection on 360° images with GAN
 
 This repo contains the codes that used in paper *SalGAN360: Visual Saliency Detection on 360° images with GAN (ICMEW 2018)* by **Fang-Yi Chao**, Lu Zhang, Wassim Hamidouche, Olivier Deforges.
+
 The winner in Prediction of Head+Eye Saliency for Images in [**Salient360! Grand Challenges at ICME’18**.](https://salient360.ls2n.fr/) 
 
 ### Abstract
@@ -21,3 +22,12 @@ title={Salgan360: Visual Saliency Prediction On 360 Degree Images With Generativ
 year={2018},
 month={July},}
 '''
+
+```
+   @INPROCEEDINGS{8551543,
+       author = {F. Chao and L. Zhang and W. Hamidouche and O. Deforges},
+       booktitle = {2018 IEEE International Conference on Multimedia Expo Workshops (ICMEW)},
+       title = {Salgan360: Visual Saliency Prediction On 360 Degree Images With Generative Adversarial Networks},
+       year = {2018},
+       month = {July},}
+```
