@@ -80,13 +80,13 @@ for n=3:length(imlist)
     im_salgan = im_salgan/max(max(im_salgan));
     im_salgan = imresize(im_salgan, [1024 2048]);
 
-    Gsalmap = double(imread(['predictions_global_salmap/' fileName]));
+    Gsalmap = double(imread(['predi_global_salmap/' fileName]));
     Gsalmap = imresize(Gsalmap, [1024 2048]);
     Lsalmap = im_salgan;
     Lsalmap = Lsalmap./max(Lsalmap(:)).*255;
     Csalmap = fusion_para.*Gsalmap+(1-fusion_para).*Lsalmap;
     Csalmap = Csalmap./max(Csalmap(:))*255;
-    imwrite(uint8(im_new),[outfolder '\' fileName]);    
+    imwrite(uint8(Csalmap),[outfolder '\' fileName]);    
 
     fprintf('Done!');
 end
