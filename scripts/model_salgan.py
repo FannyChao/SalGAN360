@@ -85,7 +85,7 @@ class ModelSALGAN(Model):
         NSSstd = 0.2631
         bcemiu = 0.3194
         bcestd = 0.1209
-        
+        '''
         #ICME18 image dataset
         KLmiu = 2.9782 
         KLstd = 2.1767
@@ -95,18 +95,8 @@ class ModelSALGAN(Model):
         NSSstd = 0.2961
         bcemiu = 0.2374
         bcestd = 0.1066
-        '''
         
-        #ICME18 video dataset
-        KLmiu = 12.3092
-        KLstd = 3.2193
-        CCmiu = 0.1730
-        CCstd = 0.1822
-        NSSmiu = 1.0456
-        NSSstd = 1.0094
-        bcemiu = 0.0744
-        bcestd = 0.0317
-                
+                    
         #model1
         #train_err = lasagne.objectives.binary_crossentropy(prediction_pooled, output_var_sal_pooled).mean()
         #model6 
