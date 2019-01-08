@@ -7,7 +7,7 @@
 Understanding visual attention of observers on 360° images gains interest along with the booming trend of Virtual Reality applications. Extending existing saliency prediction methods from traditional 2D images to 360° images is not a direct approach due to the lack of a sufficient large 360° image saliency  database. In  this  paper,  we  propose  to  extend  the SalGAN, a 2D saliency model based on the generative adversarial network, to SalGAN360 by fine tuning the SalGAN with our new loss function to predict both global and local saliency maps.  Our experiments show that the SalGAN360 outperforms the tested state-of-the-art methods.
 
 ### Visual Results
-![qualitative results]()
+![qualitative results](https://github.com/FannyChao/SalGAN360/blob/master/figs/result_image360.jpg)
 
 
 ### Requirements
