@@ -25,7 +25,7 @@ import pdb
 flag = 'salgan'
 
 def bce_batch_iterator(model, train_data, validation_sample):
-    num_epochs = 301 # fy: change from 301
+    num_epochs = 301 
     n_updates = 1
     nr_batches_train = int(len(train_data) / model.batch_size)
     for current_epoch in tqdm(range(num_epochs), ncols=20):
@@ -91,31 +91,7 @@ def salgan_batch_iterator(model, train_data, validation_sample):
             batch_output_fixa = np.asarray([z.fixation.data.astype(theano.config.floatX) / 255. for z in currChunk],
                                       dtype=theano.config.floatX)
             batch_output_fixa = np.expand_dims(batch_output_fixa, axis=1)
-            
-            #pdb.set_trace()
-            '''
-            batch_output_sal_re = np.asarray([cv2.resize(y.saliency.data.astype(theano.config.floatX), (int(y.fixation.data.astype(theano.config.floatX)[0,0]),int(y.fixation.data.astype(theano.config.floatX)[0,1])),interpolation=cv2.INTER_CUBIC ) / 255. for y in currChunk],
-                                      dtype=theano.config.floatX)
-            batch_output_sal_re = np.expand_dims(batch_output_sal_re, axis=1)
-            
-            batch_output_fixa = np.asarray([z.fixation.data.astype(theano.config.int_division) for z in currChunk],
-                                      dtype=theano.config.int_division)
-            
-            batch_output_fixa_map = np.asarray([np.zeros( (int(z.fixation.data.astype(theano.config.floatX)[0,0]),int(z.fixation.data.astype(theano.config.floatX)[0,1]))) for z in currChunk])
-            
-            #batch_output_fixa_map = np.asarray([ batch_output_fixa_map[i, batch_output_fixa[i] ]    for i in model.batch_size]  )
-            
-            for i in range(model.batch_size):
-                fixa_map = batch_output_fixa_map[i]
-                fixa =  batch_output_fixa[i, 1:302]
-                k=[k for k in fixa if k[0] >0 ]
-                fixa_map[k[0]-1, k[1]-1]=1
-                batch_output_fixa_map[i]=fixa_map
-            
-            batch_output_fixa_map = np.expand_dims(batch_output_fixa_map, axis=1)
-    
-            #batch_output2 = np.expand_dims(batch_output2, axis=1)
-            '''
+           
             
             # train generator with one batch and discriminator with next batch
             if n_updates % 2 == 0:
@@ -139,9 +115,9 @@ def salgan_batch_iterator(model, train_data, validation_sample):
         # pdb.set_trace()
         # Save weights every 3 epoch
         if current_epoch % 10 == 0:
-            np.savez(DIR_TO_SAVE + '/HE_video/model8/weights1/gen_modelWeights{:04d}.npz'.format(current_epoch),
+            np.savez(DIR_TO_SAVE + '/gen_modelWeights{:04d}.npz'.format(current_epoch),
                      *lasagne.layers.get_all_param_values(model.net['output']))
-            np.savez(DIR_TO_SAVE + '/HE_video/model8/weights1/discrim_modelWeights{:04d}.npz'.format(current_epoch),
+            np.savez(DIR_TO_SAVE + '/discrim_modelWeights{:04d}.npz'.format(current_epoch),
                      *lasagne.layers.get_all_param_values(model.discriminator['prob']))
             predict(model=model, image_stimuli=validation_sample, num_epoch=current_epoch, name='val_model8', path_output_maps=DIR_TO_SAVE)
         print 'Epoch:', current_epoch, ' train_loss->', (g_cost, d_cost, e_cost)
