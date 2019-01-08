@@ -19,9 +19,9 @@ Understanding visual attention of observers on 360° images gains interest along
 
 
 ### Usage
-Replace ```03.predict.py``` and ``` utils.py ``` in SalGAN 
+Replace ```02.train.py```, ```03.predict.py```, ```model_salgan.py``` and ``` utils.py ``` in SalGAN. 
 - Test: to predict saliency maps, you can run the ```salgan360.m``` after specifying the path to images and the path to the output saliency maps
-- Train:
+- Train: 
 
 ### Citing
 ```
