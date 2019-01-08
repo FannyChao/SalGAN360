@@ -13,8 +13,6 @@ from scipy.stats.stats import pearsonr
 
 
 def KL_div(output, target):
-    #output = output/output.max()
-    #target = target/target.max()
     output = output/output.sum()
     target = target/target.sum()    
     a = target * T.log(target/(output+1e-20)+1e-20)
@@ -22,13 +20,8 @@ def KL_div(output, target):
     return (a.sum()+b.sum())/(2.)
 
 def CC(output, target):
-    #output = output/output.max()
-    #target = target/target.max()
-    #output = output/output.sum()
-    #target = target/target.sum()
     output = (output-output.mean())/output.std()
     target = (target-target.mean())/target.std()
-    
     num=(output-output.mean())*(target-target.mean())
     out_square = T.square(output-output.mean())
     tar_square = T.square(target-target.mean())
@@ -38,8 +31,6 @@ def CC(output, target):
     return CC_score
     
 def NSS(output, fixationMap):
-    #pdb.set_trace()
-    #output = cv2.resize(output, (fixationMap.shape), interpolation=cv2.INTER_CUBIC )
     output = (output-output.mean())/output.std()
     Sal = output*fixationMap
     NSS_score = Sal.sum()/fixationMap.sum()
@@ -95,8 +86,7 @@ class ModelSALGAN(Model):
         NSSstd = 0.2961
         bcemiu = 0.2374
         bcestd = 0.1066
-        
-                    
+          
         #model1
         #train_err = lasagne.objectives.binary_crossentropy(prediction_pooled, output_var_sal_pooled).mean()
         #model6 
@@ -125,15 +115,13 @@ class ModelSALGAN(Model):
         G_params = lasagne.layers.get_all_params(self.net[output_layer_name], trainable=True)
         self.G_lr = theano.shared(np.array(G_lr, dtype=theano.config.floatX))
         G_updates = lasagne.updates.adagrad(G_obj, G_params, learning_rate=self.G_lr)
-        self.G_trainFunction = theano.function(inputs=[self.input_var, self.output_var_sal, self.output_var_fixa], outputs=cost,
-        #self.G_trainFunction = theano.function(inputs=[self.input_var, self.output_var_sal], outputs=cost,                                       
+        self.G_trainFunction = theano.function(inputs=[self.input_var, self.output_var_sal, self.output_var_fixa], outputs=cost,                                     
                                                updates=G_updates, allow_input_downcast=True,  on_unused_input='ignore')
 
         # parameters update and training of Discriminator
         D_params = lasagne.layers.get_all_params(self.discriminator['prob'], trainable=True)
         self.D_lr = theano.shared(np.array(D_lr, dtype=theano.config.floatX))
         D_updates = lasagne.updates.adagrad(D_obj, D_params, learning_rate=self.D_lr)
-        self.D_trainFunction = theano.function([self.input_var, self.output_var_sal, self.output_var_fixa], cost, updates=D_updates,
-        #self.D_trainFunction = theano.function([self.input_var, self.output_var_sal], cost, updates=D_updates,                                       
+        self.D_trainFunction = theano.function([self.input_var, self.output_var_sal, self.output_var_fixa], cost, updates=D_updates,                                       
                                                allow_input_downcast=True,  on_unused_input='ignore')
 
