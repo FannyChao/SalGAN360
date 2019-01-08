@@ -46,42 +46,10 @@ def NSS(output, fixationMap):
     if T.isnan(NSS_score):
         NSS_score = 0
     return NSS_score   
- 
-def ROC(output, fixationMap):
-    output = output/output.sum()
-    output=np.asarray(output).reshape(-1)
-    fixationMap=np.asarray(fixationMap).reshape(-1)
-    Npixels = 48*64 
-    Sth = output*fixationMap
-    #Sth.sort()
-    #Sth = Sth[::-1]
-    pdb.set_trace()
-    '''
-    #Nfixations = fixationMap.sum()
-    Nfixations = 8400
-    
-    tp = np.zeros((Nfixations+2,1))
-    fp = np.zeros((Nfixations+2,32))
-    tp[0]=0
-    tp[len(tp)-1] = 1
-    fp[1]=0
-    fp[len(fp)-1] = 1
-    
-    for i in range(8):
-        print i
-        aboveth = Sth[0:i+1].sum()   #total number of sal map values above threshold
-        tp[i+1] = i / Nfixations  #ratio sal map values at fixation locations above threshold
-        #fp[i+1] = (aboveth-i) / (Npixels - Nfixations) # ratio other sal map values above threshold
-        pdb.set_trace()
-        fp[i+1] = aboveth
-   
-    '''
-    return Sth.sum()
-
 
 
 class ModelSALGAN(Model):
-    def __init__(self, w, h, batch_size=16, G_lr=3e-5, D_lr=3e-5, alpha=1/20.): # change from G_lr=3e-4, D_lr=3e-4, batch_size=32
+    def __init__(self, w, h, batch_size=16, G_lr=3e-5, D_lr=3e-5, alpha=1/20.):
         super(ModelSALGAN, self).__init__(w, h, batch_size)
 
         # Build Generator
@@ -142,9 +110,9 @@ class ModelSALGAN(Model):
         #model1
         #train_err = lasagne.objectives.binary_crossentropy(prediction_pooled, output_var_sal_pooled).mean()
         #model6 
-        #train_err = bcemiu+bcestd*((1.)*((KL_div(prediction_pooled, output_var_sal_pooled)-KLmiu)/KLstd) - (1.)*((CC(prediction_pooled, output_var_sal_pooled)-CCmiu)/CCstd) - (1.)*((NSS(prediction_pooled, output_var_fixa_pooled)-NSSmiu)/NSSstd))
+        train_err = bcemiu+bcestd*((1.)*((KL_div(prediction_pooled, output_var_sal_pooled)-KLmiu)/KLstd) - (1.)*((CC(prediction_pooled, output_var_sal_pooled)-CCmiu)/CCstd) - (1.)*((NSS(prediction_pooled, output_var_fixa_pooled)-NSSmiu)/NSSstd))
         #model8
-        train_err = lasagne.objectives.binary_crossentropy(prediction_pooled, output_var_sal_pooled).mean()-(bcemiu+bcestd*((1.)*((CC(prediction_pooled, output_var_sal_pooled)-CCmiu)/CCstd) + (1.)*((NSS(prediction_pooled, output_var_fixa_pooled)-NSSmiu)/NSSstd)))
+        #train_err = lasagne.objectives.binary_crossentropy(prediction_pooled, output_var_sal_pooled).mean()-(bcemiu+bcestd*((1.)*((CC(prediction_pooled, output_var_sal_pooled)-CCmiu)/CCstd) + (1.)*((NSS(prediction_pooled, output_var_fixa_pooled)-NSSmiu)/NSSstd)))
         + 1e-4 * lasagne.regularization.regularize_network_params(self.net[output_layer_name], lasagne.regularization.l2)
         #pdb.set_trace()
         # Define loss function and input data
