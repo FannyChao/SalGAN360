@@ -20,8 +20,6 @@ img_size = INPUT_SIZE
 salmap_size = INPUT_SIZE
 
 # Resize train/validation files
-
-# listImgFiles = [k.split('/')[-1].split('.')[0] for k in glob.glob(os.path.join(pathToMaps, '*'))]
 listImgFiles = [k.split('\\')[-1].split('.')[0] for k in glob.glob(os.path.join(pathToImages, '*'))]
 listTestImages = [k.split('/')[-1].split('.')[0] for k in glob.glob(os.path.join(pathToImages, '*test*'))]
 
@@ -74,15 +72,12 @@ for currFile in tqdm(listFilesTrain):
                                                os.path.join(pathToFixationMaps, currFile + '.png'),
                                                dataRepresentation.LoadState.loaded, dataRepresentation.InputType.image,
                                                dataRepresentation.LoadState.loaded, dataRepresentation.InputType.imageGrayscale,
-                                               dataRepresentation.LoadState.loaded, dataRepresentation.InputType.fixationMap))
-                                               #dataRepresentation.LoadState.loaded, dataRepresentation.InputType.fixationMapMatlab))
+                                               dataRepresentation.LoadState.loaded, dataRepresentation.InputType.fixationMap))    
 
-with open(os.path.join(pathToPickle, 'train451018_with_fixa.pickle'), 'wb') as f:      # 45 degree, every 10 frames, data of 2018
+with open(os.path.join(pathToPickle, 'train_with_fixa.pickle'), 'wb') as f:      # 45 degree, every 10 frames, data of 2018
     pickle.dump(trainData, f)
 
 # Validation
-
-#listFilesValidation = [k for k in listImgFiles if 'val' in k and np.mod(int(k[8]),3)==1 and np.mod(int(k[9]),3)==1]
 listFilesValidation = [k for k in listImgFiles if 'val_' in k]
 
 validationData = []
@@ -93,9 +88,8 @@ for currFile in tqdm(listFilesValidation):
                                                     dataRepresentation.LoadState.loaded, dataRepresentation.InputType.image,
                                                     dataRepresentation.LoadState.loaded, dataRepresentation.InputType.imageGrayscale,
                                                     dataRepresentation.LoadState.loaded, dataRepresentation.InputType.fixationMap))
-                                                    # dataRepresentation.LoadState.loaded, dataRepresentation.InputType.fixationMapMatlab))
-
-with open(os.path.join(pathToPickle, 'validation451018_with_fixa.pickle'), 'wb') as f:
+                                                    
+with open(os.path.join(pathToPickle, 'validation_with_fixa.pickle'), 'wb') as f:
     pickle.dump(validationData, f)
 
 # Test
