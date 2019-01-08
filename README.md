@@ -19,9 +19,11 @@ Understanding visual attention of observers on 360° images gains interest along
 
 
 ### Usage
-Replace ```02.train.py```, ```03.predict.py```, ```model_salgan.py``` and ``` utils.py ``` in SalGAN. 
-- Test: to predict saliency maps, you can run the ```salgan360.m``` after specifying the path to images and the path to the output saliency maps
-- Train: 
+Replace ```01-data_preprocessing.py```, ```02-train.py```, ```03-predict.py```, ```model_salgan.py```, ```dataRepresentation.py```, ```model.py``` and ``` utils.py ``` in SalGAN. 
+- Test: To predict saliency maps, run the ```salgan360.m``` after specifying the path to images and the path to the output saliency maps
+- Train: 1. Run ```preprocessing_trainingdata.m``` to transfer 360° images into multiple viewports.
+         2. Run ```01-data_preprocessing.py``` to make pickle files.
+         3. Run ```02-train.py``` to fine tune salgan model.
 
 ### Citing
 ```
