@@ -6,19 +6,19 @@
 ## Abstract
 Understanding visual attention of observers on 360° images gains interest along with the booming trend of Virtual Reality applications. Extending existing saliency prediction methods from traditional 2D images to 360° images is not a direct approach due to the lack of a sufficient large 360° image saliency  database. In  this  paper,  we  propose  to  extend  the SalGAN, a 2D saliency model based on the generative adversarial network, to SalGAN360 by fine tuning the SalGAN with our new loss function to predict both global and local saliency maps.  Our experiments show that the SalGAN360 outperforms the tested state-of-the-art methods.
 
-### Visual Results
+## Visual Results
 ![qualitative results](https://github.com/FannyChao/SalGAN360/blob/master/figs/result_image360.jpg)
 
 
-### Requirements
+## Requirements
 - Download [SalGAN](https://github.com/imatge-upc/saliency-salgan-2017)
 - Matlab
 
-### Pretrained models
+## Pretrained models
 - [SalGAN360 Generator Model](https://drive.google.com/open?id=1YRZQJTynqfaZmLYgbJPZFYLFf4_jSlv_)
 
 
-### Usage
+## Usage
 Replace ```01-data_preprocessing.py```, ```02-train.py```, ```03-predict.py```, ```model_salgan.py```, ```dataRepresentation.py```, ```model.py``` and ``` utils.py ``` in SalGAN. 
 - Test: To predict saliency maps, run the ```salgan360.m``` after specifying the path to images and the path to the output saliency maps
 - Train: 
@@ -26,7 +26,7 @@ Replace ```01-data_preprocessing.py```, ```02-train.py```, ```03-predict.py```, 
    - 2. Run ```01-data_preprocessing.py``` to make pickle files.
    - 3. Run ```02-train.py``` to fine tune salgan model.
 
-### Citing
+## Citing
 ```
    @INPROCEEDINGS{8551543,
        author = {F. Chao and L. Zhang and W. Hamidouche and O. Deforges},
