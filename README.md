@@ -19,7 +19,8 @@ Understanding visual attention of observers on 360° images gains interest along
 
 
 ### Usage
-- test: to predict saliency maps, you can run the Salgan360.m after specifying the path to images and the path to the output saliency maps
+- test: 
+--1 to predict saliency maps, you can run the Salgan360.m after specifying the path to images and the path to the output saliency maps
 
 
 ### Citing
