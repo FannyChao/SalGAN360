@@ -26,18 +26,13 @@ def CC(output, target):
     out_square = T.square(output-output.mean())
     tar_square = T.square(target-target.mean())
     CC_score = num.sum()/(T.sqrt(out_square.sum()*tar_square.sum()))
-    if T.isnan(CC_score):
-        CC_score = 0        
-    return CC_score
+    
     
 def NSS(output, fixationMap):
     output = (output-output.mean())/output.std()
     Sal = output*fixationMap
     NSS_score = Sal.sum()/fixationMap.sum()
-    if T.isnan(NSS_score):
-        NSS_score = 0
-    return NSS_score   
-
+    
 
 class ModelSALGAN(Model):
     def __init__(self, w, h, batch_size=16, G_lr=3e-5, D_lr=3e-5, alpha=1/20.):
