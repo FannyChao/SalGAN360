@@ -24,7 +24,7 @@ Replace ```01-data_preprocessing.py```, ```02-train.py```, ```03-predict.py```, 
 - Train: 
    - 1. Run ```preprocessing_trainingdata.m``` to transfer 360° images into multiple viewports.
    - 2. Run ```01-data_preprocessing.py``` to make pickle files.
-   - 3. Run ```02-train.py``` to fine tune salgan model.
+   - 3. Run ```THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32,lib.cnmem=1,optimizer_including=cudnn python 02-train.py``` to fine tune salgan model.
 
 ## Citing
 ```
